@@ -1,35 +1,40 @@
+@import './vue-transitions.css';
 @import './base.css';
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+@font-face {
+  font-family: HelvNeueOrange;
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/HelvNeue55_W1G.woff2') format('woff2')
+    /*rtl:url('//fonts/HelveticaNeueW20-55Roman.woff2') format('woff2')*/;
+  font-display: swap;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+@font-face {
+  font-family: HelvNeueOrange /*rtl:insert:Arabic*/;
+  font-style: normal;
+  font-weight: 700;
+  src: url('../fonts/HelvNeue75_W1G.woff2') format('woff2')
+    /*rtl:url('//fonts/HelveticaNeueW20-75Bold.woff2') format('woff2')*/;
+  font-display: swap;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+body {
+  font-family: HelvNeueOrange, 'Roboto', sans-serif;
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
+.v-overlay {
+  z-index: 6 !important;
+}
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+.pointer {
+  cursor: pointer !important;
+}
+
+.not-allowed {
+  cursor: not-allowed;
+}
+
+.normal-arrow {
+  cursor: default;
 }
