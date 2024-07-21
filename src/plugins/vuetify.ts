@@ -14,7 +14,8 @@ export default createVuetify({
     ...components
   },
   aliases: {
-    VTextFieldSearch: VTextField
+    VTextFieldSearch: VTextField,
+    VbtnCart: VBtn
   },
   defaults: {
     VDataTable: {
@@ -47,7 +48,13 @@ export default createVuetify({
       prependInnerIcon: 'mdi-magnify',
       clearable: true,
       singleLine: true
-    }
+    },
+    VbtnCart: {
+      class:"text-none text-subtitle-1",
+      color:"#primary",
+      size:"small",
+      variant:"flat",
+    },
   },
   directives,
   theme: {
@@ -55,6 +62,7 @@ export default createVuetify({
       light: {
         dark: false,
         colors: {
+          screen: colors.grey.lighten5,
           primary: colors.blue.darken3,  
           menu: colors.teal.darken4,  
           success: colors.green.base,
@@ -87,8 +95,9 @@ export default createVuetify({
       dark: {
         dark: true,
         colors: {
+          screen: colors.grey.darken1,
           primary: colors.blue.lighten3,  
-          menu: colors.teal.darken4, 
+          menu: colors.teal.lighten3, 
           success: colors.green.base,
           avatar: colors.blueGrey.darken4,
           secondary: colors.teal.lighten3,  

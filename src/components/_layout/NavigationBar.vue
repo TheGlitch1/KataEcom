@@ -4,6 +4,7 @@ import { computed, ref } from 'vue'
 
 import ToggleTheme from '@/components/_layout/ToggleTheme.vue'
 import MenuList from '@/components/_layout/components/MenuList.vue'
+import CartButton from '@cart/components/CartButton.vue'
 
 const appTitle = ref(import.meta.env.VITE_VUE_APP_DOCUMENT_TITLE)
 const userInitials = ref('YN')
@@ -30,6 +31,7 @@ const userInitials = ref('YN')
     </v-toolbar-items>
 
     <v-spacer></v-spacer>
+    <CartButton></CartButton>
     <v-menu :close-on-content-click="false" offset-y>
       <template v-slot:activator="{ props }">
         <v-btn class="mr-6" icon v-bind="props" variant="text">
