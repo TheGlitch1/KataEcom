@@ -1,64 +1,126 @@
-# kataEcom
+# 🛍️ E-commerce Product Gallery Frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+This project is a high-quality, robust, well-documented, dynamic, and interactive e-commerce web application built using Vue 3 and Vuetify 3. It showcases a professional design system with a modular structure to keep components singular and maintainable.
 
-## Recommended IDE Setup
+## Overview
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+### Technologies Used
 
-## Type Support for `.vue` Imports in TS
+- **Vue 3**: The progressive JavaScript framework.
+- **Vuetify 3**: A Vue UI Library with beautifully handcrafted Material Components.
+- **Custom theme**: I Made a custom theme in order to keep a good color palette.
+- **virtual Component**: This is a Vuetify feature where you config/adjust certain components to avoid re-defining them later on.
+- **TypeScript**: For type safety and better developer experience.
+- **ViteAliases**: Config shortcuts, makes it easy to import things from anywhere :wink: .
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+### Technical Benefits
 
-## Customize configuration
+- Modular architecture for maintainability and scalability.
+- Use of Vuetify 3 for a consistent design system.
+- Composables for logic separation and code reuse.
+- TypeScript for type safety.
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+### Installation
 
-## Project Setup
+To get the project running locally, follow these steps:
 
-```sh
-npm install
+- Clone the repository
+- Install dependencies
+
+ ```sh
+ npm install
+ ```
+
+- Run the development server
+
+```
+  npm run serve
 ```
 
-### Compile and Hot-Reload for Development
+## Project Structure
 
-```sh
-npm run dev
+The project follows a modular structure where each feature or functionality is organized into its module. This helps in maintaining a clean and scalable codebase.
+
+```
+src/
+|-- assets/
+|-- components/
+|   |-- __tests__/
+|   |-- _layout/
+|       |-- components/
+|           |-- NavigationBar.vue
+|           |-- ToggleTheme.vue
+|       |-- composables/
+|       |-- constants/
+|           |-- MenuEntries.vue
+|   |-- icons/
+|       |-- HelloWorld.vue
+|       |-- TheWelcome.vue
+|       |-- WelcomeItem.vue
+|-- core/
+|   |-- types/
+|       |-- DataTableHeaderType.ts
+|-- modules/
+|   |-- cart/
+|       |-- api/
+|       |-- components/
+|           |-- XYcomponent.vue
+|       |-- composables/
+|       |-- constants/
+|       |-- helpers/
+|       |-- types/
+|   |-- product/
+|       |-- api/
+|           |-- ApiProduct.ts
+|       |-- components/
+|           |-- ProductList.vue
+|       |-- composables/
+|           |-- useProductListData.vue
+|       |-- constants/
+|       |-- helpers/
+|       |-- types/
+|           |-- ProductType.vue
+|-- plugins/
+|   |-- vuetify.ts
+|-- router/
+|   |-- index.ts
+|-- services/
+|-- stores/
+|-- views/
+|   |-- App.vue
+|-- main.ts
+|-- .env
+|-- .eslintrc.cjs
+|-- .gitignore
+|-- .prettierrc.json
 ```
 
-### Type-Check, Compile and Minify for Production
+## Separation of Concerns
 
-```sh
-npm run build
-```
+A key objective of any good frontend application is to keep components singular and separated with minimal code.
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+For this exercise, I could also use an Atomic architecture, but I believe you would like to see something that allows more flexibility and scalability for large-scale projects (modular monolithic architecture :wink: ).
 
-```sh
-npm run test:unit
-```
+So this achieved by using the followings :
 
-### Run End-to-End Tests with [Playwright](https://playwright.dev)
+- **composables**: to handle logic and only keeping only the essentials inside the components.
+- **Components** : Vue components for the module.
+- **Types**: TypeScript type definitions.
+- **API**: Service files for API calls.
 
-```sh
-# Install browsers for the first run
-npx playwright install
+### Features
 
-# When testing on CI, must build the project first
-npm run build
+**Product List Display**: Fetches and displays a list of products from the API, with essential details such as title, price, category, description, rating, and an image. Skeleton loaders are used during data fetching for a smooth user experience.
+**Filtering System**: A dynamic and generic filtering system allowing users to filter products by various criteria (e.g., category, price, description), managed through composables to keep the logic separated and reusable.
+**API Management**: A dedicated API service handles all product-related API calls, constructing endpoints dynamically based on the provided filters and handling multiple API calls concurrently using Promise.all.
+**Shopping Cart**: Implemented using Pinia store for state management, with dynamic calculation of total price and quantity for each item. The cart allows adding, removing, and clearing items, with totals recalculated dynamically based on user actions. A clear cart functionality deletes all items, and a cart icon in the navigation shows a reactive badge with the number of products added.
+**Navigation Menu**: Uses a modular structure to separate the MenuEntries for easy maintenance, with routes declaring components for navigation and a separated component building the menu dynamically from the MenuEntries.
+**Theme Switcher**: Allows users to toggle between dark and light modes, adapting the application's color scheme based on the selected theme for a consistent user experience.
+**Vuetify Integration**: Ensures consistent design and UI components with custom theme configuration and virtual components for theme consistency.
+**Alias Configuration**: Configures Vite/Webpack aliases to simplify imports and improve code readability, using aliases like @product, @cart, @/, and others to import modules and components easily.
+**TypeScript Usage**: Ensures type safety and better code maintainability, with custom types defined for products and other entities for consistent data handling.
+**Composable Functions**: Encapsulates logic for fetching and filtering products in composable functions, keeping components clean and focusing on rendering logic rather than data handling.
 
-# Runs the end-to-end tests
-npm run test:e2e
-# Runs the tests only on Chromium
-npm run test:e2e -- --project=chromium
-# Runs the tests of a specific file
-npm run test:e2e -- tests/example.spec.ts
-# Runs the tests in debug mode
-npm run test:e2e -- --debug
-```
+### Conclusion
 
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+This project exemplifies a scalable and maintainable approach to building complex frontend applications using Vue 3, Vuetify, and TypeScript. With a modular architecture, dynamic filtering system, and reusable composables, it demonstrates best practices in developing robust and flexible applications. These design choices highlight problem-solving skills and a commitment to optimal development practices, providing a strong foundation for any large-scale frontend application.
