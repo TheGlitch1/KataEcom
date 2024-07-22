@@ -51,7 +51,7 @@ export default createVuetify({
     },
     VbtnCart: {
       class:"text-none text-subtitle-1",
-      color:"#primary",
+      color:"primary",
       size:"small",
       variant:"flat",
     },

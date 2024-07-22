@@ -10,11 +10,23 @@ const axiosInstance = axios.create(API_URL)
 export default class ApiProduct {
   private static endpoint = '/products'
 
-  static async list(filter = {}): Promise<ProductType[]> {
+  static async list(filters: { key: string; value: string | number }[] = []): Promise<ProductType[]> {
     try {
-      const response = await axiosInstance.get(this.endpoint, { params: filter })
-      console.log('response', response.data)
-      return response.data
+
+      if (filters.length === 0) {
+        const response = await axiosInstance.get(this.endpoint);
+        return response.data;
+      }
+
+      const promises = filters.length > 0 ? filters.map(filter => {
+        const endpoint = `${this.endpoint}/${filter.key}/${filter.value}`
+        return axiosInstance.get(endpoint)
+      }) : []
+
+      const responses: AxiosResponse<ProductType[]>[] = await Promise.all(promises)
+      const data = responses.flatMap(response => response.data);
+      console.log('response', data);
+      return data;
     } catch (error) {
       console.error('Error fetching products:', error)
       throw error

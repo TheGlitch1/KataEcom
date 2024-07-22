@@ -6,10 +6,10 @@ export default function useProductData() {
   const productList = ref([] as ProductType[])
   const loading = ref<boolean>(false)
 
-  const getData = async () => {
+  const getData = async (filters: { key: string; value: string | number }[] = []) => {
     loading.value = true
     try {
-      productList.value = await ApiProduct.list()
+      productList.value = await ApiProduct.list(filters)
       console.log('productList', productList)
     } finally {
       loading.value = false

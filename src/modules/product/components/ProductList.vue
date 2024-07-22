@@ -3,10 +3,13 @@ import { ref, computed, onBeforeMount } from 'vue'
 import useProductData from '@product/composables/useProductListData'
 import { useCartStore } from '@cart/stores/cart'
 import type ProductType from '@product/types/ProductType'
+import ProductFilters from '@product/components/ProductFilters.vue'
 
 const { loading, productList, getData } = useProductData()
 
 const cartStore = useCartStore()
+const appliedFilters = ref<{ key: keyof ProductType; value: string | number; type: 'string' | 'number' }[]>([])
+// const filteredProducts = ref([] as ProductType[])
 
 const limitedDescription = (description: string) => {
   return description.length > 100 ? description.substring(0, 100) + '...' : description
@@ -24,14 +27,51 @@ const addToCart = (product: ProductType) => {
   cartStore.addToCart(product)
   console.log('Add to Cart', product)
 }
+
+const applyFilters = async (filters: { key: keyof ProductType; value: string | number; type: 'string' | 'number' }[]) => {
+  console.log("Filters", filters);
+  appliedFilters.value = filters
+
+  const filterApiArray = [] as { key: string; value: string | number }[]
+  filters.forEach(filter => {
+    if (filter.key === 'category') {
+      filterApiArray.push({ key: filter.key, value: filter.value.toString() });
+    }
+  });
+
+    await getData(filterApiArray)
+}
+
+
+const filteredProducts = computed(() => {
+  return productList.value.filter((product: ProductType) => {
+    return appliedFilters.value.every(filter => {
+      if (filter.key === 'category') return true
+      const productValue = filter.key.split('.').reduce((o, i) => o[i], product)
+      if (filter.type === 'number') {
+        return productValue >= filter.value
+      } else {
+        return productValue.toString().toLowerCase().includes(filter.value.toString().toLowerCase())
+      }
+    })
+  })
+})
 </script>
 
 <template>
   <v-container>
     <v-card :loading class="pa-2" variant="text">
-      <v-card-title>Product List</v-card-title>
-      
-      <v-row>
+      <v-card-title>
+        <v-row align="center">
+          <v-col cols="4">
+            <h3>Product List ({{ productList.length }})</h3>
+          </v-col>
+          <v-col cols="8" class="d-flex justify-end">
+            <ProductFilters @filter="applyFilters" />
+          </v-col>
+        </v-row>
+      </v-card-title>
+      <v-row dense>
         <v-col v-if="loading" cols="12" sm="6" md="3" v-for="n in 8" :key="n">
           <v-skeleton-loader
             :loading
@@ -40,7 +80,7 @@ const addToCart = (product: ProductType) => {
           ></v-skeleton-loader>
         </v-col>
         <template v-else>
-          <v-col v-for="product in productList" :key="product.id" cols="12" sm="6" md="3">
+          <v-col v-for="product in filteredProducts" :key="product.id" cols="12" sm="6" md="3">
             <v-card class="mx-auto my-4" max-width="400" variant="elevated">
               <v-img
                 :src="product.image"
