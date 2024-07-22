@@ -29,6 +29,7 @@
                 </p>
             </v-col>
         </v-row>
+        <strong>I look forward to discussing how these principles and techniques can contribute to your team’s success.</strong>
       </v-card-text>
       <v-card-actions>
               <v-spacer></v-spacer>

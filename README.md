@@ -20,6 +20,23 @@ This project is a high-quality, robust, well-documented, dynamic, and interactiv
 - Composables for logic separation and code reuse.
 - TypeScript for type safety.
 
+### Installation
+
+To get the project running locally, follow these steps:
+
+- Clone the repository
+- Install dependencies
+
+ ```sh
+ npm install
+ ```
+
+- Run the development server
+
+```
+  npm run serve
+```
+
 ## Project Structure
 
 The project follows a modular structure where each feature or functionality is organized into its module. This helps in maintaining a clean and scalable codebase.
@@ -90,3 +107,20 @@ So this achieved by using the followings :
 - **Components** : Vue components for the module.
 - **Types**: TypeScript type definitions.
 - **API**: Service files for API calls.
+
+### Features
+
+**Product List Display**: Fetches and displays a list of products from the API, with essential details such as title, price, category, description, rating, and an image. Skeleton loaders are used during data fetching for a smooth user experience.
+**Filtering System**: A dynamic and generic filtering system allowing users to filter products by various criteria (e.g., category, price, description), managed through composables to keep the logic separated and reusable.
+**API Management**: A dedicated API service handles all product-related API calls, constructing endpoints dynamically based on the provided filters and handling multiple API calls concurrently using Promise.all.
+**Shopping Cart**: Implemented using Pinia store for state management, with dynamic calculation of total price and quantity for each item. The cart allows adding, removing, and clearing items, with totals recalculated dynamically based on user actions. A clear cart functionality deletes all items, and a cart icon in the navigation shows a reactive badge with the number of products added.
+**Navigation Menu**: Uses a modular structure to separate the MenuEntries for easy maintenance, with routes declaring components for navigation and a separated component building the menu dynamically from the MenuEntries.
+**Theme Switcher**: Allows users to toggle between dark and light modes, adapting the application's color scheme based on the selected theme for a consistent user experience.
+**Vuetify Integration**: Ensures consistent design and UI components with custom theme configuration and virtual components for theme consistency.
+**Alias Configuration**: Configures Vite/Webpack aliases to simplify imports and improve code readability, using aliases like @product, @cart, @/, and others to import modules and components easily.
+**TypeScript Usage**: Ensures type safety and better code maintainability, with custom types defined for products and other entities for consistent data handling.
+**Composable Functions**: Encapsulates logic for fetching and filtering products in composable functions, keeping components clean and focusing on rendering logic rather than data handling.
+
+### Conclusion
+
+This project exemplifies a scalable and maintainable approach to building complex frontend applications using Vue 3, Vuetify, and TypeScript. With a modular architecture, dynamic filtering system, and reusable composables, it demonstrates best practices in developing robust and flexible applications. These design choices highlight problem-solving skills and a commitment to optimal development practices, providing a strong foundation for any large-scale frontend application.
