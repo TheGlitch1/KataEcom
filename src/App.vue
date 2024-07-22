@@ -16,7 +16,7 @@ onBeforeMount(() => {
 <template>
   <v-app>
     <NavigationBar />
-    <v-container class="mt-12 bg-screen" fluid>
+    <v-container class="mt-12" fluid>
       <RouterView />
     </v-container>
   </v-app>

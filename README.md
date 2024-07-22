@@ -86,5 +86,7 @@ For this exercise, I could also use an Atomic architecture, but I believe you wo
 
 So this achieved by using the followings :
 
-- **composables**: to handle logic and only keeping the essentials inside the components.
-- **
+- **composables**: to handle logic and only keeping only the essentials inside the components.
+- **Components** : Vue components for the module.
+- **Types**: TypeScript type definitions.
+- **API**: Service files for API calls.

@@ -40,10 +40,8 @@ onBeforeMount(() => {
 })
 
 const removeFilter = (index: number) => {
-  console.log("index", index)
   if (index >= 0 && index < activeFilters.value.length) {
     activeFilters.value.splice(index, 1)
-    console.log('Emitting filter-update after removal', activeFilters.value)
   }
 }
 
@@ -51,7 +49,6 @@ const getCategories = (async () => {
     loading.value = true
     try {
       categories.value = await ApiCategory.list()
-      console.log('productList', categories)
     } finally {
       loading.value = false
     }
@@ -69,20 +66,19 @@ const ProcessedCategories = computed(() => {
 })
 
 watch(activeFilters, (newFilters) => {
-  console.log('activeFilters changed:', newFilters)
   emit('filter', newFilters)
 }, { deep: true })
 
 </script>
 
 <template>
-  <v-container>
+
     <v-row>
       <v-col cols="12">
         <v-select
           v-model="selectedFilter"
           :items="availableFilters"
-          label="Add Filter"
+          label="Select a filter"
           item-title="label"
           item-value="key"
           clearable
@@ -139,6 +135,7 @@ watch(activeFilters, (newFilters) => {
           column
         >
           <v-chip
+            class="text-accent"
             v-for="(filter, index) in activeFilters"
             :key="index"
           >
@@ -150,5 +147,5 @@ watch(activeFilters, (newFilters) => {
         </v-chip-group>
       </v-col>
     </v-row>
-  </v-container>
+
 </template>

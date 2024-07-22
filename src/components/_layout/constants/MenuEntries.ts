@@ -26,4 +26,4 @@ const menuSupervisions: MenuType = {
   title: 'Liste des produits'
 }
 
-export const menuEntries: MenuType[] = [menuHome, menuAbout, menuSupervisions]
+export const menuEntries: MenuType[] = [menuHome , menuSupervisions]

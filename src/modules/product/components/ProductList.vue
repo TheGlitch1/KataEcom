@@ -3,14 +3,12 @@ import { ref, computed, onBeforeMount } from 'vue'
 import { useCartStore } from '@cart/stores/cart'
 import type ProductType from '@product/types/ProductType'
 import ProductFilters from '@product/components/ProductFilters.vue'
-
 import useFilters from '@product/composables/useFiltersProduct'
 
 const { loading, applyFilters, filteredProducts } = useFilters()
 
 const cartStore = useCartStore()
 const appliedFilters = ref<{ key: keyof ProductType; value: string | number; type: 'string' | 'number' }[]>([])
-// const filteredProducts = ref([] as ProductType[])
 
 const limitedDescription = (description: string) => {
   return description.length > 100 ? description.substring(0, 100) + '...' : description
@@ -21,24 +19,22 @@ onBeforeMount(async () => {
 })
 
 const viewProduct = (id: number) => {
-  console.log('View Product', id)
 }
 
 const addToCart = (product: ProductType) => {
   cartStore.addToCart(product)
-  console.log('Add to Cart', product)
 }
 </script>
 
 <template>
   <v-container>
-    <v-card :loading class="pa-2" variant="text">
+    <v-card :loading class="pa-2" variant="elevated">
       <v-card-title>
-        <v-row align="center">
+        <v-row align-content="start" justify="space-around" align="start">
           <v-col cols="4">
             <h3>Product List ({{ filteredProducts.length }})</h3>
           </v-col>
-          <v-col cols="8" class="d-flex justify-end">
+          <v-col cols="8">
             <ProductFilters @filter="applyFilters" />
           </v-col>
         </v-row>

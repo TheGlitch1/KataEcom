@@ -19,7 +19,6 @@ const groupedItems = computed(() => {
   }, {})
 })
 
-// Methods to interact with the store
 const removeFromCart = (id: number) => {
   cartStore.removeFromCart(id)
 }

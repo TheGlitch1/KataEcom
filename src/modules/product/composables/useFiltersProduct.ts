@@ -8,7 +8,6 @@ export default function useFilters() {
   const { loading ,productList, getData } = useProductData()
 
   const applyFilters = async (filters: { key: keyof ProductType; value: string | number; type: 'string' | 'number' }[] = []) => {
-    console.log("Filters", filters)
     appliedFilters.value = filters
 
     const filterArray = filters

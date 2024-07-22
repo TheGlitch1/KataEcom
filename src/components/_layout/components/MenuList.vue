@@ -5,7 +5,6 @@ import { menuEntries, type MenuType } from '@/components/_layout/constants/MenuE
 const menus = ref<MenuType[]>(menuEntries)
 
 const goToRoute = (route: string) => {
-  // router.push(route)
 }
 </script>
 <template>

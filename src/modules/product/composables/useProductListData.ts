@@ -10,7 +10,6 @@ export default function useProductData() {
     loading.value = true
     try {
       productList.value = await ApiProduct.list(filters)
-      console.log('productList', productList)
     } finally {
       loading.value = false
     }

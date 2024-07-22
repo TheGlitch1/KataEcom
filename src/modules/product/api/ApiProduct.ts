@@ -25,7 +25,6 @@ export default class ApiProduct {
 
       const responses: AxiosResponse<ProductType[]>[] = await Promise.all(promises)
       const data = responses.flatMap(response => response.data);
-      console.log('response', data);
       return data;
     } catch (error) {
       console.error('Error fetching products:', error)
