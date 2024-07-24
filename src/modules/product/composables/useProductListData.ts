@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import ApiProduct from '@product/api/ApiProduct'
-import type ProductType from '@product/types/ProductType'
+import type {ProductType} from '@product/types/ProductType'
 
 export default function useProductData() {
   const productList = ref([] as ProductType[])

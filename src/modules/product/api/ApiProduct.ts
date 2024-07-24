@@ -1,5 +1,5 @@
 import axios, { AxiosError, type AxiosRequestConfig, type AxiosResponse } from 'axios'
-import type ProductType from '@product/types/ProductType'
+import type {ProductType} from '@product/types/ProductType'
 
 const API_URL = {
   baseURL:  import.meta.env.VITE_VUE_APP_API_BACK
@@ -34,7 +34,7 @@ export default class ApiProduct {
 
   static async get(id: Number): Promise<ProductType> {
     try {
-      const response = await axiosInstance.get(`${id}`)
+      const response = await axiosInstance.get(`${this.endpoint}/${id}`)
       return response.data
     } catch (error) {
       console.error(`Error fetching product with ID ${id}:`, error)
