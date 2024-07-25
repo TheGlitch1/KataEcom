@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, computed, onBeforeMount } from 'vue'
 import { useCartStore } from '@cart/stores/cart'
-import type ProductType from '@product/types/ProductType'
+import type { ProductType } from '@product/types/ProductType'
 import ProductFilters from '@product/components/ProductFilters.vue'
 import useFilters from '@product/composables/useFiltersProduct'
 
@@ -80,7 +80,7 @@ const addToCart = (product: ProductType) => {
               </v-card-text>
               <v-divider></v-divider>
               <v-card-actions>
-                <VbtnCart color="primary" @click="addToCart(product)">Add to Cart</VbtnCart>
+                <VbtnCart color="primary" @click="addToCart(product)" ref="addToCartButton">Add to Cart</VbtnCart>
                 <v-spacer></v-spacer>
                 <div class="font-weight-bold">${{ product.price }}</div>
               </v-card-actions>

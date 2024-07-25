@@ -1,5 +1,5 @@
 import { ref, computed } from 'vue'
-import type ProductType from '@/types/ProductType'
+import type {ProductType} from '@product/types/ProductType'
 import useProductData from '@product/composables/useProductListData'
 
 const appliedFilters = ref<{ key: keyof ProductType; value: string | number; type: 'string' | 'number' }[]>([])
@@ -23,7 +23,7 @@ export default function useFilters() {
         if (filter.key === 'category') return true
         const productValue = filter.key.split('.').reduce((o, i) => o[i], product)
         if (filter.type === 'number') {
-          return productValue >= filter.value
+          return Number(productValue) >= Number(filter.value)
         } else {
           return productValue.toString().toLowerCase().includes(filter.value.toString().toLowerCase())
         }

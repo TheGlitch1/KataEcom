@@ -24,6 +24,7 @@
     "vuetify": "^3.6.13"
   },
   "devDependencies": {
+    "@pinia/testing": "^0.1.3",
     "@playwright/test": "^1.44.1",
     "@rushstack/eslint-patch": "^1.8.0",
     "@tsconfig/node20": "^20.1.4",
