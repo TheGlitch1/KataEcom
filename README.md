@@ -42,57 +42,95 @@ To get the project running locally, follow these steps:
 The project follows a modular structure where each feature or functionality is organized into its module. This helps in maintaining a clean and scalable codebase.
 
 ```
-src/
-|-- assets/
-|-- components/
-|   |-- __tests__/
-|   |-- _layout/
-|       |-- components/
-|           |-- NavigationBar.vue
-|           |-- ToggleTheme.vue
-|       |-- composables/
-|       |-- constants/
-|           |-- MenuEntries.vue
-|   |-- icons/
-|       |-- HelloWorld.vue
-|       |-- TheWelcome.vue
-|       |-- WelcomeItem.vue
-|-- core/
-|   |-- types/
-|       |-- DataTableHeaderType.ts
-|-- modules/
-|   |-- cart/
-|       |-- api/
-|       |-- components/
-|           |-- XYcomponent.vue
-|       |-- composables/
-|       |-- constants/
-|       |-- helpers/
-|       |-- types/
-|   |-- product/
-|       |-- api/
-|           |-- ApiProduct.ts
-|       |-- components/
-|           |-- ProductList.vue
-|       |-- composables/
-|           |-- useProductListData.vue
-|       |-- constants/
-|       |-- helpers/
-|       |-- types/
-|           |-- ProductType.vue
-|-- plugins/
-|   |-- vuetify.ts
-|-- router/
-|   |-- index.ts
-|-- services/
-|-- stores/
-|-- views/
-|   |-- App.vue
-|-- main.ts
-|-- .env
-|-- .eslintrc.cjs
-|-- .gitignore
-|-- .prettierrc.json
+└── 📁src
+    └── 📁assets
+        └── base.css
+        └── logo.svg
+        └── main.css
+        └── vue-transitions.css
+    └── 📁components
+        └── 📁__tests__
+            └── HelloWorld.spec.ts
+        └── 📁_layout
+            └── 📁components
+                └── MenuList.vue
+            └── 📁constants
+                └── MenuEntries.ts
+            └── NavigationBar.vue
+            └── ToggleTheme.vue
+        └── 📁icons
+            └── IconCommunity.vue
+            └── IconDocumentation.vue
+            └── IconEcosystem.vue
+            └── IconSupport.vue
+            └── IconTooling.vue
+        └── HelloWorld.vue
+        └── TheWelcome.vue
+        └── WelcomeItem.vue
+    └── 📁core
+        └── 📁types
+            └── DataTableHeaderType.ts
+    └── 📁modules
+        └── 📁cart
+            └── 📁__tests__
+            └── 📁api
+            └── 📁components
+                └── Cart.vue
+                └── CartButton.vue
+            └── 📁composables
+            └── 📁constants
+            └── 📁helpers
+            └── 📁stores
+                └── cart.ts
+            └── 📁types
+                └── CartType.ts
+        └── 📁product
+            └── 📁__test__
+                └── ApiProduct.spec.ts
+                └── ProductList.spec.ts
+            └── 📁api
+                └── ApiProduct.ts
+            └── 📁components
+                └── ProductFilters.vue
+                └── ProductList.vue
+            └── 📁composables
+                └── useFiltersProduct.ts
+                └── useProductListData.ts
+            └── 📁constants
+            └── 📁helpers
+                └── filterProductHelper.ts
+            └── 📁types
+                └── ProductType.ts
+        └── 📁project
+            └── 📁__tests__
+                └── Features.spec.ts
+            └── 📁components
+                └── Features.vue
+                └── Summary.vue
+            └── 📁constants
+                └── KeyFeatures.ts
+                └── links.ts
+    └── 📁plugins
+        └── vuetify.ts
+    └── 📁router
+        └── index.ts
+    └── 📁services
+        └── 📁api
+            └── ApiCategory.ts
+            └── index.ts
+        └── 📁types
+            └── CatergoryType.ts
+    └── 📁stores
+        └── counter.ts
+    └── 📁tests
+        └── 📁mocks
+            └── productMocks.ts
+        └── setup.ts
+    └── 📁views
+        └── AboutView.vue
+        └── HomeView.vue
+    └── App.vue
+    └── main.ts
 ```
 
 ## Separation of Concerns
