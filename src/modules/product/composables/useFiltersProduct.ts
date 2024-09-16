@@ -21,7 +21,7 @@ export default function useFilters() {
     return productList.value.filter((product: ProductType) => {
       return appliedFilters.value.every(filter => {
         if (filter.key === 'category') return true
-        const productValue = filter.key.split('.').reduce((o, i) => o[i], product)
+        const productValue = filter.key.split('.').reduce((o: any, i: string) => o[i], product)
         if (filter.type === 'number') {
           return Number(productValue) >= Number(filter.value)
         } else {

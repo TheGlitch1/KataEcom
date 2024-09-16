@@ -1,7 +1,7 @@
 import type { ProductType } from '@product/types/ProductType'
 
 export interface FilterConfig {
-  key: keyof ProductType;
+  key: string;
   label: string;
   type: any;
 }

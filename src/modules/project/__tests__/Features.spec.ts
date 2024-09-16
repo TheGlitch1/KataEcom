@@ -26,7 +26,7 @@ describe('Features.vue', () => {
     const buttons = wrapper.findAll('button.v-btn');
     const featuresButton = buttons[0];
     const technicalChoicesButton = buttons[1];
-
+    // @ts-ignore
     expect(wrapper.vm.showFeatures).toBe(true);
     expect(featuresButton.classes()).toContain('text-primary');
     expect(technicalChoicesButton.classes()).not.toContain('text-primary');
@@ -43,7 +43,7 @@ describe('Features.vue', () => {
     // After click, Technical Choices button should have 'text-primary' class and Features button should not.
     expect(featuresButton.classes()).not.toContain('text-primary');
     expect(technicalChoicesButton.classes()).toContain('text-secondary');
-    
+    // @ts-ignore
     expect(wrapper.vm.showFeatures).toBe(false);
     expect(wrapper.findAll('li').length).toBe(keyFeatures.technicalChoices.reduce((sum, choice) => sum + choice.points.length, 0));
   });

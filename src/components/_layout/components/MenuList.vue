@@ -12,7 +12,7 @@ const goToRoute = (route: string) => {
     <template #activator="{ props }">
       <v-btn
         v-bind="props"
-        :to="menu.href ? menu.href : null"
+        :to="menu.href ? menu.href : ''"
         :selected-class="menu.href === '/' ? 'selected-class' : ''"
       >
         <v-icon v-if="menu.icon" class="mr-1">{{ menu.icon }}</v-icon>

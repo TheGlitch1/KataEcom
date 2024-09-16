@@ -119,7 +119,7 @@ The project follows a modular structure where each feature or functionality is o
             └── ApiCategory.ts
             └── index.ts
         └── 📁types
-            └── CatergoryType.ts
+            └── CategoryType.ts
     └── 📁stores
         └── counter.ts
     └── 📁tests

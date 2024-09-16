@@ -3,12 +3,12 @@ import { ref, computed, onBeforeMount, watch, defineEmits } from 'vue'
 import ApiCategory from '@/services/api/ApiCategory'
 import { filterConfig, type FilterConfig } from '@product/helpers/filterProductHelper'
 import type { ProductType } from '@product/types/ProductType'
-import type CategoryType from '@/services/types/CategoryType'
+import type {CategoryType} from '@/services/types/CategoryType'
 
 const availableFilters = ref<FilterConfig[]>(filterConfig)
 const selectedFilter = ref<keyof ProductType | null>(null)
 const filterValue = ref<string | number | null>(null)
-const activeFilters = ref<{ key: keyof ProductType; label: string; value: string | number; type: 'string' | 'number' }[]>([])
+const activeFilters = ref<{ key: string; label: string; value: string | number  ; type: 'string' | 'number' }[]>([])
 const categories = ref([] as CategoryType[])
 const loading = ref(false)
 
@@ -56,7 +56,7 @@ const getCategories = (async () => {
 
 const ProcessedCategories = computed(() => {
   return categories.value.map((category) => {
-    const isSelected = activeFilters.value.some((item: FilterConfig) => item.value === category);
+    const isSelected = activeFilters.value.some((item) => typeof item.value === 'string' && typeof category === 'string' && item.value === category);
     return {
       label: category,
       value: category,

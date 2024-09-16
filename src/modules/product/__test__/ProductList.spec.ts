@@ -60,7 +60,7 @@ describe('ProductList.vue', () => {
     if (addButton) {
       await addButton.trigger('click')
       expect(cartStore.addToCart).toHaveBeenCalledTimes(1)
-      console.log('addToCart called with:', cartStore.addToCart.mock.calls[0][0])
+      console.log('addToCart called with:', cartStore.addToCart)
     } else {
       throw new Error('Add to cart button not found')
     }

@@ -2,7 +2,6 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import axios from 'axios'
 import ApiProduct from '@product/api/ApiProduct'
 import { mockProducts } from '@/tests/mocks/productMocks'
-import type { ProductType } from '@product/types/ProductType'
 
 vi.mock('axios', () => {
   return {
@@ -23,20 +22,20 @@ vi.mock('axios', () => {
   };
 });
 
-const mockedAxios = axios as jest.Mocked<typeof axios>;
+const mockedAxiosGet = axios.get as unknown as ReturnType<typeof vi.fn>;
 
 describe('ApiProduct', () => {
   beforeEach(() => {
-    mockedAxios.get.mockReset()
+    mockedAxiosGet.mockReset()
   })
 
   it('fetches a list of products without filters', async () => {
-    mockedAxios.get.mockResolvedValue({ data: mockProducts })
+    mockedAxiosGet.mockResolvedValue({ data: mockProducts })
 
     const products = await ApiProduct.list()
 
     expect(products).toEqual(mockProducts)
-    expect(mockedAxios.get).toHaveBeenCalledWith('/products')
+    expect(mockedAxiosGet).toHaveBeenCalledWith('/products')
   })
 
   it('fetches a list of products with filters', async () => {
@@ -48,37 +47,37 @@ describe('ApiProduct', () => {
     const mockResponseCategory1 = [mockProducts[0]]
     const mockResponsePrice100 = [mockProducts[0]]
 
-    mockedAxios.get
+    mockedAxiosGet
       .mockResolvedValueOnce({ data: mockResponseCategory1 })
       .mockResolvedValueOnce({ data: mockResponsePrice100 })
 
     const products = await ApiProduct.list(filters)
 
     expect(products).toEqual(mockResponseCategory1.concat(mockResponsePrice100))
-    expect(mockedAxios.get).toHaveBeenCalledWith('/products/category/Category 1')
-    expect(mockedAxios.get).toHaveBeenCalledWith('/products/price/100')
+    expect(mockedAxiosGet).toHaveBeenCalledWith('/products/category/Category 1')
+    expect(mockedAxiosGet).toHaveBeenCalledWith('/products/price/100')
   })
 
   it('fetches a product by ID', async () => {
     const mockProduct = mockProducts[0]
-    mockedAxios.get.mockResolvedValue({ data: mockProduct })
+    mockedAxiosGet.mockResolvedValue({ data: mockProduct })
 
     const product = await ApiProduct.get(1)
 
     expect(product).toEqual(mockProduct)
-    expect(mockedAxios.get).toHaveBeenCalledWith('/products/1')
+    expect(mockedAxiosGet).toHaveBeenCalledWith('/products/1')
   })
 
   it('handles errors when fetching products', async () => {
     const errorMessage = 'Error fetching products'
-    mockedAxios.get.mockRejectedValue(new Error(errorMessage))
+    mockedAxiosGet.mockRejectedValue(new Error(errorMessage))
 
     await expect(ApiProduct.list()).rejects.toThrow(errorMessage)
   })
 
   it('handles errors when fetching a product by ID', async () => {
     const errorMessage = `Error fetching product with ID 1`
-    mockedAxios.get.mockRejectedValue(new Error(errorMessage))
+    mockedAxiosGet.mockRejectedValue(new Error(errorMessage))
 
     await expect(ApiProduct.get(1)).rejects.toThrow(errorMessage)
   })
