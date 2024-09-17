@@ -14,5 +14,6 @@ export default defineConfig({
       '@cart': fileURLToPath(new URL('./src/modules/cart', import.meta.url)),
       '@project': fileURLToPath(new URL('./src/modules/project', import.meta.url))
     }
-  }
+  },
+  base:'/KataEcom/'
 })
