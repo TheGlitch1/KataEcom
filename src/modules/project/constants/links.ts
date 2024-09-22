@@ -11,7 +11,7 @@ export const links = [
   },
   {
     title: 'Website',
-    url: 'theGlitch1.github.io',
+    url: 'https://theGlitch1.github.io',
     icon: 'mdi-web',
   },
   {
