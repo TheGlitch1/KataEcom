@@ -14,6 +14,7 @@
       "@product/*": ["./src/modules/product/*"],
       "@project/*": ["./src/modules/project/*"],
       "@core/*": ["./src/core/*"],
+      "@notifications/*": ["./src/components/_notifications/*"]
     }
   }
 }

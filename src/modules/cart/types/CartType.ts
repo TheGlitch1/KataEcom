@@ -1,9 +1,11 @@
 import type { ProductType } from '@product/types/ProductType'
 
 export interface CartItem extends ProductType {
-    quantity: number
-  }
-  
+  quantity: number
+}
+
 export interface CartState {
-    items: CartItem[]
-  }
+  items: CartItem[]
+  showAlert: boolean
+  alertMessage: string
+}

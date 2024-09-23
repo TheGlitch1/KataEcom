@@ -9,6 +9,16 @@ export const keyFeatures: Record<string, { title: string; icon?: string; points:
       ]
     },
     {
+      title: 'Global Notification System',
+      icon: 'mdi-bell-alert',
+      points: [
+        'Implemented a global notification system using composable functions.',
+        'The notification system allows triggering alerts from any part of the app.',
+        'Supports different notification types: success, warning, error, and info.',
+        'Keeps components clean and focuses on user feedback without handling repetitive logic.'
+      ]
+    },
+    {
       title: 'Product List Display',
       icon: 'mdi-view-list',
       points: [
@@ -41,6 +51,7 @@ export const keyFeatures: Record<string, { title: string; icon?: string; points:
       icon: 'mdi-cart-outline',
       points: [
         'Implemented using Pinia store for state management.',
+        'Stores cart items in local storage for persistence across sessions.',
         'Dynamic calculation of total price and quantity for each item.',
         'Ability to add, remove, and clear items from the cart.',
         'Cart totals are recalculated dynamically based on user actions.',
@@ -99,6 +110,14 @@ export const keyFeatures: Record<string, { title: string; icon?: string; points:
       points: [
         'Logic for fetching and filtering products is encapsulated in composable functions.',
         'This approach keeps components clean and focuses on rendering logic rather than data handling.'
+      ]
+    },
+    {
+      title: 'Singleton Pattern for Global State',
+      icon: 'mdi-shield-account',
+      points: [
+        'The notification system is implemented as a Singleton, ensuring that only one instance of the notification state is shared across the application.',
+        'It provides centralized control over notification visibility, type, and message, improving maintainability and reducing redundancy.'
       ]
     }
   ]

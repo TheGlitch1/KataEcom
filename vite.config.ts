@@ -12,8 +12,9 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
       '@product': fileURLToPath(new URL('./src/modules/product', import.meta.url)),
       '@cart': fileURLToPath(new URL('./src/modules/cart', import.meta.url)),
-      '@project': fileURLToPath(new URL('./src/modules/project', import.meta.url))
+      '@project': fileURLToPath(new URL('./src/modules/project', import.meta.url)),
+      '@notifications': fileURLToPath(new URL('./src/components/_notifications', import.meta.url))
     }
   },
-  base:'/KataEcom/'
+  base: '/KataEcom/'
 })
