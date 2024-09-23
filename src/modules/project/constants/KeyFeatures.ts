@@ -1,15 +1,16 @@
-export const keyFeatures = {
+export const keyFeatures: Record<string, { title: string; icon?: string; points: string[] }[]> = {
   features: [
     {
-      title: 'Modular Structure',
+      title: 'Theme Switcher',
+      icon: 'mdi-theme-light-dark',
       points: [
-        'The project follows a modular architecture, which is ideal for scalable/maintaining applications.',
-        'Each module (e.g., product, cart) has its own folder containing components, composables,helpers, types, and APIs.',
-        'This structure allows for easy management, testing, and scaling of the application.'
+        'A theme switcher allows users to toggle between dark and light modes.',
+        'The application adapts its color scheme based on the selected theme, providing a consistent user experience.'
       ]
     },
     {
       title: 'Product List Display',
+      icon: 'mdi-view-list',
       points: [
         'Fetches and displays a list of products from the API.',
         "Each product is displayed in a card format using customized Vuetify's card components.",
@@ -19,6 +20,7 @@ export const keyFeatures = {
     },
     {
       title: 'Filtering System',
+      icon: 'mdi-filter-outline',
       points: [
         'A Generic & Dynamic filtering system allowing users to filter products by various criteria (e.g., category, price, description).',
         'Filters are managed through a composable to keep the logic separated and reusable.',
@@ -27,6 +29,7 @@ export const keyFeatures = {
     },
     {
       title: 'API Management',
+      icon: 'mdi-api',
       points: [
         'A dedicated API service handles all product-related API calls.',
         'The list method in the API service constructs endpoints dynamically based on the provided filters.',
@@ -35,6 +38,7 @@ export const keyFeatures = {
     },
     {
       title: 'Shopping Cart',
+      icon: 'mdi-cart-outline',
       points: [
         'Implemented using Pinia store for state management.',
         'Dynamic calculation of total price and quantity for each item.',
@@ -46,23 +50,27 @@ export const keyFeatures = {
     },
     {
       title: 'Navigation Menu',
+      icon: 'mdi-menu',
       points: [
         'Uses a composable to separate the MenuEntries for easy maintenance.',
         'A separated component builds the menu dynamically from the MenuEntries.',
         'Routes are used to declare components for navigation.'
       ]
-    },
-    {
-      title: 'Theme Switcher',
-      points: [
-        'A theme switcher allows users to toggle between dark and light modes.',
-        'The application adapts its color scheme based on the selected theme, providing a consistent user experience.'
-      ]
     }
   ],
   technicalChoices: [
     {
+      title: 'Modular Structure',
+      icon: 'mdi-puzzle-outline',
+      points: [
+        'The project follows a modular architecture, which is ideal for scalable/maintaining applications.',
+        'Each module (e.g., product, cart) has its own folder containing components, composables, helpers, types,constants, and APIs.',
+        'This structure allows for easy management, testing, and scaling of the application.'
+      ]
+    },
+    {
       title: 'Vuetify Integration',
+      icon: `$${'vuetify'}`,
       points: [
         'Vuetify is used for consistent design and UI components.',
         'Custom theme configuration with primary and secondary colors, dark and light mode support.',
@@ -71,6 +79,7 @@ export const keyFeatures = {
     },
     {
       title: 'Alias Configuration',
+      icon: 'mdi-link-variant',
       points: [
         'Vite/Webpack aliases are configured to simplify imports and improve code readability.',
         'Aliases like @product, @cart, @/, and others are used to import modules and components easily.'
@@ -78,6 +87,7 @@ export const keyFeatures = {
     },
     {
       title: 'TypeScript Usage',
+      icon: 'mdi-language-typescript',
       points: [
         'TypeScript is used for type safety and better code maintainability.',
         'Custom types are defined for products and other entities, ensuring consistent data handling.'
@@ -85,6 +95,7 @@ export const keyFeatures = {
     },
     {
       title: 'Composable Functions',
+      icon: 'mdi-function-variant',
       points: [
         'Logic for fetching and filtering products is encapsulated in composable functions.',
         'This approach keeps components clean and focuses on rendering logic rather than data handling.'

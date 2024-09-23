@@ -6,10 +6,7 @@ import Summary from '@project/components/Summary.vue'
 
 <template>
   <main>
-    <v-card>
-      <Summary />
-      <v-divider></v-divider>
-      <Features />
-    </v-card>
+    <Summary />
+    <Features />
   </main>
 </template>

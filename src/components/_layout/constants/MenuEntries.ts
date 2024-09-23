@@ -13,7 +13,7 @@ interface SubMenuType {
 
 const menuHome: MenuType = {
   href: '/',
-  title: 'Accueil'
+  title: 'Project'
 }
 
 const menuAbout: MenuType = {
@@ -23,7 +23,7 @@ const menuAbout: MenuType = {
 
 const menuSupervisions: MenuType = {
   href: '/produits',
-  title: 'Liste des produits'
+  title: 'Shop'
 }
 
 export const menuEntries: MenuType[] = [menuHome , menuSupervisions]

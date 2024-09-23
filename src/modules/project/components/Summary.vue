@@ -1,56 +1,125 @@
 <template>
-  <v-row class="px-10 py-5">
-    <v-card variant="text">
-      <h2 class="">Summary</h2>
-      <v-card-text>
-        <v-row justify="space-between">
-          <v-col>
-            <p class="pa-2 ma-2">
-              This project showcases a scalable and maintainable approach to building a complex frontend application using
-              Vue 3, Vuetify, and TypeScript. The modular structure, dynamic filtering system, and reusable composables
-              demonstrate best practices for developing robust and flexible applications.
-              <br />
-              This project exemplifies problem-solving and optimal design choices, making it a strong foundation for any
-              large-scale frontend application.
-            </p>
-            
-          </v-col>
-          <v-divider vertical></v-divider>
-          <v-col>
-            <p class="pa-2 ma-2">
-              Key highlights include:
-            <ul class="ml-5">
-              <li>Modular architecture for maintainability and scalability.</li>
-              <li>Dynamic filtering system with composables for reusable logic.</li>
-              <li>Vuetify integration for consistent UI design and theming.</li>
-              <li>ypeScript for type safety and improved code quality.</li>
-              <li>Alias configuration for simplified imports and code organization.</li>
-            </ul>
+  <v-container fluid>
+    <v-row class="bg-screen2 rounded">
+      <v-col cols="12">
+        <v-card class="pa-10" variant="text">
+          <v-card-title class="text-h5 text-center"> </v-card-title>
+          <v-row>
+            <v-col cols="12" md="6">
+              <v-card-text class="bg-primary2 border rounded-lg d-flex flex-column fill-height">
+                <h2 class="font-weight-bold text-center mb-7">{{ summaryText.title }}</h2>
+                <p
+                  v-for="(text, index) in summaryText.description"
+                  :key="index"
+                  class="text-justify px-5"
+                >
+                  <v-icon
+                    class="custom-bg-icon"
+                    icon="mdi-format-quote-close"
+                    color="white"
+                  ></v-icon>
+                  {{ text }}
                 </p>
+              </v-card-text>
             </v-col>
-        </v-row>
-        <strong>I look forward to discussing how these principles and techniques can contribute to your team’s success.</strong>
-      </v-card-text>
-      <v-card-actions>
-              <v-spacer></v-spacer>
-              <template v-for="link in links">
-              <v-btn
-                class="mx-4"
-                variant="tonal"
-                color="plink"
-                :prepend-icon="link.icon"
-                size="small"
-                :href="link.url" 
-                target="_blank"
+            <v-col cols="12" md="6" class="text-center">
+              <v-card-text
+                class="bg-primary2 border rounded-lg d-flex flex-column fill-height px-5"
               >
-              {{ link.title }}
-            </v-btn>
-              <v-divider vertical></v-divider>
-            </template>
-      </v-card-actions>
-    </v-card>
-  </v-row>
+                <h2 class="font-weight-bold mb-4">Key highlights include:</h2>
+
+                <v-chip
+                  v-for="(highlight, index) in summaryText.highlights"
+                  :key="index"
+                  class="ma-1 text-justify"
+                  :prepend-icon="highlight.icon"
+                  variant="elevated"
+                  color="screen2"
+                  :style="{ animationDelay: `${index + 1 * 0.5}s` }"
+                  @click.stop=""
+                >
+                  {{ highlight.text }}
+                </v-chip>
+              </v-card-text>
+            </v-col>
+            <v-col cols="12" class="d-flex justify-center">
+              <strong>{{ summaryText.lastWord }}</strong>
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col cols="12" class="d-flex justify-center">
+              <template v-for="link in links">
+                <v-btn
+                  class="mx-2 my-1"
+                  variant="tonal"
+                  color="plink"
+                  :icon="link.icon"
+                  size="small"
+                  :href="link.url"
+                  target="_blank"
+                  v-tooltip="`Visit my ${link.title}`"
+                >
+                </v-btn>
+              </template>
+            </v-col>
+            <v-col cols="12" class="d-flex justify-center align-center flex-column mt-10">
+              <v-icon size="30" color="dark" class="scroll-icon scroll"> mdi-mouse </v-icon>
+              <p class="text-xs font-weight-black scroll">Scroll</p>
+            </v-col>
+          </v-row>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 <script lang="ts" setup>
-import {links} from '@project/constants/links'
+import { summaryText } from '@project/constants/Summary'
+import { links } from '@project/constants/links'
 </script>
+<style scoped>
+@keyframes shine {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: none;
+  }
+  50% {
+    opacity: 0.1;
+    box-shadow:
+      0 0 12px rgb(255, 255, 255),
+      0 0 20px rgb(255, 255, 255);
+  }
+}
+
+@keyframes scrollMouse {
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(10px);
+  }
+}
+
+.v-chip {
+  animation: shine 0.4s ease-in-out 2;
+  animation-fill-mode: forwards;
+}
+
+.scroll {
+  opacity: 0.8;
+  animation: scrollMouse 2.5s ease-in-out infinite;
+}
+
+.custom-bg-icon {
+  position: absolute;
+  top: 110px;
+  left: 120px;
+  transform: translate(-50%, -50%);
+  font-size: 200px;
+  opacity: 0.1;
+  z-index: 0;
+}
+</style>
