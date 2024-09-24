@@ -54,6 +54,7 @@ export const keyFeatures: Record<string, { title: string; icon?: string; points:
         'Stores cart items in local storage for persistence across sessions.',
         'Dynamic calculation of total price and quantity for each item.',
         'Ability to add, remove, and clear items from the cart.',
+        'A maximum quantity limit per product and a total cart limit (3 items, 10 products) ',
         'Cart totals are recalculated dynamically based on user actions.',
         'Clear cart functionality that deletes all items in the cart.',
         'Cart icon in the navigation with a reactive badge showing the number of products added.'

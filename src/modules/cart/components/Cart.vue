@@ -7,6 +7,9 @@ const cartStore = useCartStore()
 const items = computed(() => cartStore.items)
 const totalItems = computed(() => cartStore.totalItems)
 const totalPrice = computed(() => cartStore.totalPrice)
+const isCartFull = computed(() => cartStore.isCartFull)
+
+const maxProduct = cartStore.maxProductQuantity
 
 const clearCartDialog = ref(false)
 const checkoutDialog = ref(false)
@@ -27,6 +30,13 @@ const removeFromCart = (id: number) => {
 }
 
 const updateQuantity = (id: number, quantity: number) => {
+  if (isCartFull) {
+    items.value.forEach((item) => {
+      if (item.id === id) {
+        item.quantity -= 1
+      }
+    })
+  }
   cartStore.updateQuantity(id, quantity)
 }
 
@@ -91,6 +101,7 @@ const clearCart = () => {
                         v-model.number="item.quantity"
                         type="number"
                         min="1"
+                        :max="maxProduct"
                         @change="updateQuantity(item.id, item.quantity)"
                         label="Quantity"
                         variant="underlined"
@@ -119,6 +130,7 @@ const clearCart = () => {
           <v-divider></v-divider>
           <v-card-actions>
             <v-btn
+              class="clearCart"
               color="error"
               :disabled="!items.length"
               @click="clearCartDialog = true"
@@ -127,6 +139,7 @@ const clearCart = () => {
             >
             <v-spacer></v-spacer>
             <v-btn
+              class="checkout"
               color="accent"
               prepend-icon="mdi-checkbox-marked-circle-plus-outline"
               variant="tonal"

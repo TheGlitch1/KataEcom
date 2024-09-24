@@ -10,25 +10,23 @@ import ProductList from '@product/components/ProductList.vue'
 import { createTestingPinia } from '@pinia/testing'
 import { useCartStore } from '@cart/stores/cart'
 
-
-
 const Vuetify = createVuetify({
   components,
-  directives,
-});
+  directives
+})
 
 // Mock useFilters composable
 vi.mock('@product/composables/useFiltersProduct', () => ({
   default: () => ({
     loading: false,
     filteredProducts: mockProducts,
-    applyFilters: vi.fn(),
+    applyFilters: vi.fn()
   })
 }))
 
 describe('ProductList.vue', () => {
-  let wrapper: ReturnType<typeof mount>;
-  let cartStore: ReturnType<typeof useCartStore>;
+  let wrapper: ReturnType<typeof mount>
+  let cartStore: ReturnType<typeof useCartStore>
 
   beforeEach(() => {
     wrapper = mount(ProductList, {
@@ -41,22 +39,22 @@ describe('ProductList.vue', () => {
           }
         }
       }
-    });
-    ;
-
-    cartStore = useCartStore();
-    vi.spyOn(cartStore, 'addToCart');
+    })
+    cartStore = useCartStore()
+    vi.spyOn(cartStore, 'addToCart')
   })
 
   it('renders product list', async () => {
-    expect(wrapper.find('h3').text()).toContain('Product List (3)')
+    const badge = wrapper.find('.v-badge')
+    expect(wrapper.find('h3').text()).toContain('Product List')
+    expect(badge.text()).toContain('3')
     expect(wrapper.find('.text-white').text()).toContain('Product 1')
     expect(wrapper.find('.text-truncate').text()).toContain('Description 1')
   })
 
   it('adds product to cart', async () => {
     // await wrapper.vm.$nextTick()
-    const addButton = wrapper.findComponent({ name: 'VbtnCart', ref:"addToCartButton"})
+    const addButton = wrapper.findComponent({ name: 'VbtnCart', ref: 'addToCartButton' })
     if (addButton) {
       await addButton.trigger('click')
       expect(cartStore.addToCart).toHaveBeenCalledTimes(1)
@@ -66,5 +64,4 @@ describe('ProductList.vue', () => {
       throw new Error('Add to cart button not found')
     }
   })
-
 })

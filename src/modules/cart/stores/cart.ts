@@ -4,9 +4,11 @@ import type { ProductType } from '@product/types/ProductType'
 import type { CartItem, CartState } from '@cart/types/CartType'
 import useNotification from '@notifications/composables/useNotification'
 
-const CART_STORAGE_KEY = 'shopping_cart'
-const maxQuantity = 3
 const { showNotification } = useNotification()
+
+const CART_STORAGE_KEY = 'shopping_cart'
+const MAX_PRODUCT_QUANTITY = 3
+const MAX_CART_QUANTITY = 10
 
 export const useCartStore = defineStore('cart', {
   state: (): CartState => ({
@@ -18,7 +20,12 @@ export const useCartStore = defineStore('cart', {
     totalItems: (state) =>
       state.items.reduce((total: number, item: CartItem) => total + item.quantity, 0),
     totalPrice: (state) =>
-      state.items.reduce((total: number, item: CartItem) => total + item.price * item.quantity, 0)
+      state.items.reduce((total: number, item: CartItem) => total + item.price * item.quantity, 0),
+    isCartFull: (state) =>
+      state.items.reduce((total: number, item: CartItem) => total + item.quantity, 0) >=
+      MAX_CART_QUANTITY,
+    isProductMaxed: () => (quantity: number) => quantity >= MAX_PRODUCT_QUANTITY,
+    maxProductQuantity: () => MAX_PRODUCT_QUANTITY
   },
   actions: {
     initializeCart() {
@@ -33,10 +40,31 @@ export const useCartStore = defineStore('cart', {
       localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(this.items))
     },
 
+    canAddToCart() {
+      if (this.totalItems + 1 > MAX_CART_QUANTITY) {
+        showNotification(
+          `You can only have up to ${MAX_CART_QUANTITY} items in your cart`,
+          'warning'
+        )
+        return false
+      }
+      return true
+    },
+
     addToCart(product: ProductType) {
       const existingItem = this.items.find((item: CartItem) => item.id === product.id)
+      if (!this.canAddToCart()) return
+
       if (existingItem) {
-        existingItem.quantity++
+        if (existingItem.quantity < MAX_PRODUCT_QUANTITY) {
+          existingItem.quantity++
+        } else {
+          showNotification(
+            `You can only add up to ${MAX_PRODUCT_QUANTITY} of this product`,
+            'warning'
+          )
+          return
+        }
       } else {
         this.items.push({ ...product, quantity: 1 })
       }
@@ -51,14 +79,24 @@ export const useCartStore = defineStore('cart', {
     },
     updateQuantity(productId: number, quantity: number) {
       const item = this.items.find((item: CartItem) => item.id === productId)
+      if (!this.canAddToCart()) return
+
       if (item) {
-        item.quantity = quantity
+        if (quantity <= MAX_PRODUCT_QUANTITY) {
+          item.quantity = quantity
+          this.saveCart()
+        } else {
+          showNotification(
+            `You can only add up to ${MAX_PRODUCT_QUANTITY} of this product`,
+            'warning'
+          )
+        }
       }
-      this.saveCart()
     },
     clearCart() {
       this.items = []
       localStorage.removeItem(CART_STORAGE_KEY)
+      showNotification('Your cart has been cleared', 'success')
     }
   }
 })
